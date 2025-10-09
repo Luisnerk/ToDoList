@@ -8,7 +8,7 @@ using API.Interfaces;
 
 namespace API.Repositories;
 
-public class BaseRepository<T> : IBaseRepository<T> where T: BaseEntity
+public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
     private readonly DataContext _context;
     public BaseRepository(DataContext context)
@@ -18,5 +18,9 @@ public class BaseRepository<T> : IBaseRepository<T> where T: BaseEntity
     public async void Register(T entity)
     {
         await _context.Set<T>().AddAsync(entity);
+    }
+    public async void SaveAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }
