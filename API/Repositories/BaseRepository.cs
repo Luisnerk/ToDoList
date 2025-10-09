@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories;
 
@@ -15,11 +16,18 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         _context = context;
     }
-    public async void Register(T entity)
+
+    public async Task Register(T entity)
     {
         await _context.Set<T>().AddAsync(entity);
     }
-    public async void SaveAsync()
+
+    public async Task<IEnumerable<T>> GetAllAsync()
+    {
+        return await _context.Set<T>().ToListAsync();
+    }
+
+    public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
     }

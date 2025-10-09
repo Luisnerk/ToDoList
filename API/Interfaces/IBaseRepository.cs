@@ -3,7 +3,8 @@ using API.Entities;
 
 namespace API.Interfaces;
 
-public interface IBaseRepository<T> where T: BaseEntity
+public interface IBaseRepository<T> where T : BaseEntity
 {
-    public void Register(T entity);
+    public Task Register(T entity);
+    public Task<IEnumerable<T>> GetAllAsync();
 }

@@ -9,7 +9,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
-public class ToDoItemController: BaseController
+
+public class ToDoItemController : BaseController
 {
     private readonly ToDoItemRepository _itemRepository;
     public ToDoItemController(IMapper mapper, DataContext context) : base(mapper, context)
@@ -18,11 +19,17 @@ public class ToDoItemController: BaseController
     }
 
     [HttpPost]
-
-    public ActionResult RegisterItem(ToDoItem item)
+    public async Task<ActionResult> RegisterItem([FromBody] ToDoItem item)
     {
-        _itemRepository.Register(item);
-        _itemRepository.SaveAsync();
+        await _itemRepository.Register(item);
+        await _itemRepository.SaveAsync();
         return Ok();
-    }   
+    }
+
+    [HttpGet("all")]
+    public async Task<ActionResult<ToDoItem>> GetAllItems()
+    {
+        var items = await _itemRepository.GetAllAsync();
+        return Ok(items);
+    }
 }
