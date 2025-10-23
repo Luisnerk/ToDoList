@@ -1,9 +1,10 @@
 import { Component, computed, linkedSignal, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ToDoContainer } from "./to-do/to-do-container/to-do-container";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToDoContainer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

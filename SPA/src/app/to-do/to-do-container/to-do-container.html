@@ -1,0 +1,6 @@
+
+<div>
+    @for (item of toDoList; track item.id) {
+        <app-to-do-item [title]="item.title" [description]="item.description" />
+    }
+</div>
