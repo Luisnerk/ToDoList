@@ -10,6 +10,7 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 app.MapControllers();
+app.UseCors("CORS");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
