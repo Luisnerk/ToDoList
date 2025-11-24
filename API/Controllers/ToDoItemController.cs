@@ -50,4 +50,21 @@ public class ToDoItemController : BaseController
             // return StatusCode(418);
         }
     }
+
+    [HttpPatch("done")]
+    public async Task<ActionResult> ToDoDone([FromBody]int id)
+    {
+        try
+        {
+            if (!await _itemRepository.ToDoDone(id)){
+                return BadRequest("Id not found");
+            }
+            await _itemRepository.SaveAsync();
+        }
+        catch(Exception ex)
+        {
+            return BadRequest();
+        }
+        return Ok();
+    }
 }

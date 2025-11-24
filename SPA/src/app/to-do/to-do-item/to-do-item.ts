@@ -23,4 +23,13 @@ export class ToDoItem {
       error: () => console.log("error")
     });
   }
+
+  doneItem(id: number) {
+    this.itemService.setDoneItem(id).subscribe({
+      next: response => response.ok ?
+                        this.itemService.itemChanged() :
+                        console.log("Error al cambiar a hecho"),
+            error: () => console.log("Ocurrió un error"),
+    })
+  }
 }

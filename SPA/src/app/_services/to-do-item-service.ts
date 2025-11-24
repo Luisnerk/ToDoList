@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { ItodoItem } from '../_models/itodo-item';
+import { observeNotification } from 'rxjs/internal/Notification';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class ToDoItemService {
   deleteItem(id: number) {
     const idModel = {id: id};
     return this.http.delete(this.baseUrl + "/delete", {observe: "response", body: idModel});
+  }
+
+  setDoneItem(id: number) {
+    return this.http.patch(this.baseUrl + "/done", id, {observe: "response"});
   }
 }

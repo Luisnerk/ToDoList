@@ -10,4 +10,5 @@ namespace API.Interfaces;
 
 public interface IToDoItemRepository : IBaseRepository<ToDoItem>
 {
+    public Task<bool> ToDoDone(int id);
 }

@@ -11,7 +11,7 @@ namespace API.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
-    private readonly DataContext _context;
+    protected readonly DataContext _context;
     public BaseRepository(DataContext context)
     {
         _context = context;

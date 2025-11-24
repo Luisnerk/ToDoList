@@ -19,7 +19,7 @@
     <div class="bottom-div">
         <button class="btn btn-danger" (click)="deleteItem(id())">Eliminar</button>
         @if (!done()){
-            <button class="btn btn-secondary">Hecho</button>
+            <button class="btn btn-secondary" (click)="doneItem(id())">Hecho</button>
         }
     </div>
 </div>
