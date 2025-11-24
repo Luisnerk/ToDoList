@@ -1,0 +1,45 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Nota</h1>
+        <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+          <fieldset>
+            <div>  
+              <label for="title" class="form-label">Título</label>
+              <input type="text" class="form-control" formControlName="title" [maxlength]="20" />
+            </div>
+            <div>
+              <label for="description" class="form-label">Descripción</label>
+              <textarea
+              type="text"
+              class="form-control"
+              formControlName="description"
+              [maxlength]="200"
+              [rows]="5"
+              ></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Guardar nota</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

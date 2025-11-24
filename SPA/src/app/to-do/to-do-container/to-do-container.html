@@ -1,6 +1,6 @@
 
-<div>
+<div class="item-container">
     @for (item of toDoList; track item.id) {
-        <app-to-do-item [title]="item.title" [description]="item.description" />
+        <app-to-do-item [title]="item.title" [description]="item.description" [id]="item.id" [done]="item.done"/>
     }
 </div>

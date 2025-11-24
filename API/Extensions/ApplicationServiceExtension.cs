@@ -15,7 +15,7 @@ public static class ApplicationServiceExtension
         serviceCollection.AddCors(options =>
             {
                 options.AddPolicy(name: "CORS",
-                policy => policy.WithOrigins("https://localhost:4200")
+                policy => policy.WithOrigins("http://localhost:4200")
                                     .AllowAnyHeader()
                                     .AllowAnyMethod());
             });

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
@@ -31,5 +32,22 @@ public class ToDoItemController : BaseController
     {
         var items = await _itemRepository.GetAllAsync();
         return Ok(items);
+    }
+
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteItem([FromBody]ToDoItem id)
+    {
+        try
+        {
+            ToDoItem item = new ToDoItem { Id = id.Id };
+            _itemRepository.Delete(item);
+            await _itemRepository.SaveAsync();
+            return Ok();
+
+        } catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+            // return StatusCode(418);
+        }
     }
 }

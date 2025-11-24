@@ -1,16 +1,21 @@
 import { Component, computed, linkedSignal, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToDoContainer } from "./to-do/to-do-container/to-do-container";
+import { ToDoForm } from "./to-do/to-do-form/to-do-form";
+import { NgxSpinnerComponent } from "ngx-spinner";
+import { SpinnerService } from './_services/spinner-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToDoContainer],
+  imports: [RouterOutlet, ToDoContainer, ToDoForm, NgxSpinnerComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('SPA');
 
+  constructor(private spinner: SpinnerService) {
+  }
   color = signal<string>('azul')
   cambio = computed(() => {
     const a = this.color()
@@ -46,6 +51,7 @@ export class App {
   }
 
   resetColor2() {
+    this.spinner.showSpinner();
     this.color2.set("n")
   }
 }
