@@ -18,11 +18,7 @@ export class ToDoForm {
   ngOnInit() {
     this.initializeForm();
   }
-
-  closeModal() {
-    this.closeModalBtn.nativeElement.click();
-  }
-
+  
   initializeForm() {
     console.log("hadsiuhasdhuias")
     this.form = this.fb.group({
@@ -31,12 +27,23 @@ export class ToDoForm {
     });
   }
   
+  closeModal() {
+    this.closeModalBtn.nativeElement.click();
+  }
+
+  clearInputs() {
+    this.form.setValue({title: "", description: ""} )
+  }
+  
   submitForm() {
     if (this.form.valid){
       const values = {...this.form.value}
       this.toDoservice.registerItem(values).subscribe({
-        next: () => {this.closeModal();
-          this.toDoservice.itemChanged();}
+        next: () => {
+          this.closeModal();
+          this.clearInputs();
+          this.toDoservice.itemChanged();
+        }
       });
     }
   }

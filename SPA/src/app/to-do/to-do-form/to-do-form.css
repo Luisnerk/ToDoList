@@ -1,0 +1,7 @@
+.btn-container {
+    width: 100vw;
+    margin: 20px 0px 15px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
