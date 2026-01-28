@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using API.Helpers;
 using API.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ public class ToDoItemController : BaseController
     private readonly ToDoItemRepository _itemRepository;
     public ToDoItemController(IMapper mapper, DataContext context) : base(mapper, context)
     {
-        _itemRepository = new ToDoItemRepository(_context);
+        _itemRepository = new ToDoItemRepository(_context, _mapper);
     }
 
     [HttpPost]
@@ -31,6 +32,13 @@ public class ToDoItemController : BaseController
     public async Task<ActionResult<ToDoItem>> GetAllItems()
     {
         var items = await _itemRepository.GetAllAsync();
+        return Ok(items);
+    }
+
+    [HttpGet("page")]
+    public async Task<ActionResult<PagedList<ToDoItem>>> GetPage(int pageNumber)
+    {
+        var items = await _itemRepository.GetPaged(pageNumber);
         return Ok(items);
     }
 

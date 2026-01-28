@@ -2,13 +2,14 @@
 using API.Data;
 using API.Entities;
 using API.Interfaces;
-using SQLitePCL;
+using AutoMapper;
 
 namespace API.Repositories;
 
 public class ToDoItemRepository : BaseRepository<ToDoItem>, IToDoItemRepository
 {
-    public ToDoItemRepository(DataContext context) : base(context)
+
+    public ToDoItemRepository(DataContext context, IMapper mapper) : base(context, mapper)
     {
     }
 
