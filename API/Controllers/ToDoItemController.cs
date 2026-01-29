@@ -36,9 +36,9 @@ public class ToDoItemController : BaseController
     }
 
     [HttpGet("page")]
-    public async Task<ActionResult<PagedList<ToDoItem>>> GetPage(int pageNumber)
+    public async Task<ActionResult<PagedList<ToDoItem>>> GetPage(UserParams userParams)
     {
-        var items = await _itemRepository.GetPaged(pageNumber);
+        var items = await _itemRepository.GetPaged(userParams);
         return Ok(items);
     }
 

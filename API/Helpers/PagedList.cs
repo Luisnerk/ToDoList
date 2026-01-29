@@ -19,8 +19,10 @@ public class PagedList<T> : List<T>
         AddRange(items);
     }
 
-    public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize = 10)
+    public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, UserParams userParams)
     {
+        int pageNumber = userParams.pageNumber;
+        int pageSize = userParams.PageSize;
         var count = await source.CountAsync();
         var items = await source.Skip((pageNumber-1) * pageSize).Take(pageSize).ToListAsync();
         return new PagedList<T>(items, pageNumber, (int)(count/pageSize), pageSize);

@@ -33,10 +33,10 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         return await _context.Set<T>().ToListAsync();
     }
 
-    public async Task<PagedList<T>> GetPaged(int pageNumber)
+    public async Task<PagedList<T>> GetPaged(UserParams userParams)
     {
         var query = _context.Set<T>().AsQueryable();
-        var pagedItems = await PagedList<T>.CreateAsync(query.AsNoTracking().ProjectTo<T>(_mapper.ConfigurationProvider), pageNumber);
+        var pagedItems = await PagedList<T>.CreateAsync(query.AsNoTracking().ProjectTo<T>(_mapper.ConfigurationProvider), userParams);
         return pagedItems;
     }
 
