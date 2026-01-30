@@ -8,14 +8,16 @@ using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 namespace API.Helpers;
 public class PagedList<T> : List<T>
 {
+    public int PageSize { get; set; }
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }
-    public int PageSize { get; set; }
-    public PagedList(IEnumerable<T> items, int currentPage, int totalPages, int pageSize)
+    public int TotalItems { get; set; }
+    public PagedList(IEnumerable<T> items, int currentPage, int totalPages, int pageSize, int totalItems)
     {
         CurrentPage = currentPage;
         TotalPages = totalPages;
         PageSize = pageSize;
+        TotalItems = totalItems;
         AddRange(items);
     }
 
@@ -25,6 +27,6 @@ public class PagedList<T> : List<T>
         int pageSize = userParams.PageSize;
         var count = await source.CountAsync();
         var items = await source.Skip((pageNumber-1) * pageSize).Take(pageSize).ToListAsync();
-        return new PagedList<T>(items, pageNumber, (int)(count/pageSize), pageSize);
+        return new PagedList<T>(items, pageNumber, (int)Math.Ceiling((double)count/pageSize), pageSize, count);
     }
 }

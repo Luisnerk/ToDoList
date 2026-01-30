@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using API.Extensions;
 using API.Helpers;
 using API.Repositories;
 using AutoMapper;
@@ -39,6 +40,7 @@ public class ToDoItemController : BaseController
     public async Task<ActionResult<PagedList<ToDoItem>>> GetPage(UserParams userParams)
     {
         var items = await _itemRepository.GetPaged(userParams);
+        Response.AddPaginationHeader(new PaginationHeader(items.CurrentPage, items.PageSize, items.TotalPages, items.TotalItems));
         return Ok(items);
     }
 
