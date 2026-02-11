@@ -1,6 +1,13 @@
 
 <div class="item-container">
-    @for (item of toDoList; track item.id) {
+    @for (item of pagination.result; track item.id) {
         <app-to-do-item [title]="item.title" [description]="item.description" [id]="item.id" [done]="item.done"/>
     }
 </div>
+
+<div>
+  <app-pagination (pageChanged)="changePage($event)" [totalPages]="pagination.pagination?.totalPages" [currentPage]="pagination.pagination?.currentPage"></app-pagination>
+</div>
+<p>
+    primer: {{pagination.pagination?.currentPage}}
+</p>

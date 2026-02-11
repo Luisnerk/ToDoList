@@ -4,10 +4,11 @@ import { ToDoContainer } from "./to-do/to-do-container/to-do-container";
 import { ToDoForm } from "./to-do/to-do-form/to-do-form";
 import { NgxSpinnerComponent } from "ngx-spinner";
 import { SpinnerService } from './_services/spinner-service';
+import { Pagination } from "./utils/pagination/pagination";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToDoContainer, ToDoForm, NgxSpinnerComponent],
+  imports: [RouterOutlet, ToDoContainer, ToDoForm, NgxSpinnerComponent, Pagination],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
