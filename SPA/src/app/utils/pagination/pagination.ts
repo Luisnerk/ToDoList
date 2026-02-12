@@ -21,7 +21,8 @@ export class Pagination {
   }
 
   changePage(page: number){
-    this.currentPage = page;
-    this.pageChanged.emit(page);
+    if (page > 0 && page <= this.totalPages!){
+      this.pageChanged.emit(page);
+    }
   }
 }
