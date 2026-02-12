@@ -23,10 +23,12 @@ public class PagedList<T> : List<T>
 
     public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, UserParams userParams)
     {
-        int pageNumber = userParams.pageNumber;
         int pageSize = userParams.PageSize;
-        var count = await source.CountAsync();
+        int count = await source.CountAsync();
+        int totalPages = (int)Math.Ceiling((double)count/pageSize);
+        int pageNumber = userParams.pageNumber <= totalPages ? userParams.pageNumber : totalPages;
         var items = await source.Skip((pageNumber-1) * pageSize).Take(pageSize).ToListAsync();
-        return new PagedList<T>(items, pageNumber, (int)Math.Ceiling((double)count/pageSize), pageSize, count);
+
+        return new PagedList<T>(items, pageNumber, totalPages, pageSize, count);
     }
 }
