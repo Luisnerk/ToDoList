@@ -6,10 +6,11 @@ import { SpinnerService } from '../../_services/spinner-service';
 import { Pagination } from '../../utils/pagination/pagination';
 import { PaginatedResult } from '../../_models/pagination';
 import { UserParams } from '../../_models/user-params';
+import { PageSizeSelector } from "../../utils/page-size-selector/page-size-selector";
 
 @Component({
   selector: 'app-to-do-container',
-  imports: [ToDoItem, Pagination],
+  imports: [ToDoItem, Pagination, PageSizeSelector],
   templateUrl: './to-do-container.html',
   styleUrl: './to-do-container.css'
 })
@@ -44,6 +45,11 @@ export class ToDoContainer {
 
   changePage(pageNumber: number){
     this.userParams.currentPage = pageNumber;
+    this.loadItems();
+  }
+
+  pageSizeChange(pageSize: number) {
+    this.userParams.pagesize = pageSize;
     this.loadItems();
   }
 }

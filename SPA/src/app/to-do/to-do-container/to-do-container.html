@@ -1,3 +1,6 @@
+<div>
+    <app-page-size-selector [tag]="'Tamaño de página: '" (pageSize)="pageSizeChange($event)"></app-page-size-selector>
+</div>
 
 <div class="item-container">
     @for (item of pagination.result; track item.id) {
@@ -9,5 +12,5 @@
   <app-pagination (pageChanged)="changePage($event)" [totalPages]="pagination.pagination?.totalPages" [currentPage]="pagination.pagination?.currentPage"></app-pagination>
 </div>
 <p>
-    primer: {{pagination.pagination?.currentPage}}
+    primer: {{pagination.pagination?.totalPages}}
 </p>

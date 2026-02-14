@@ -1,0 +1,13 @@
+.selector-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-select {
+    width: 100px;
+}
+
+.tag-text {
+    font-size: large;
+    padding-right: 10px;
+}

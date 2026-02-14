@@ -1,0 +1,13 @@
+<div class="selector-container">
+    @if (tag) {
+        <div class="tag-text">
+            {{tag}}
+        </div>
+    }
+    <select class="form-select" [(ngModel)]="selectedValue" (change)="selectValueChange()">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+    </select>
+</div>
